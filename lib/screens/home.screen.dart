@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../model/property.dart';
+import 'property_detail/property_detail_screen.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -107,59 +108,82 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildPropertyCards(BuildContext context) {
+    // Create Property objects
+    List<Property> properties = [
+      Property(
+        name: "Naples Villa",
+        location: "Panjim, Goa", 
+        price: "86,000",
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500"
+      ),
+      Property(
+        name: "Colina Villa",
+        location: "Coorg, Kerala",
+        price: "100,000", 
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500"
+      ),
+    ];
+    
     return SizedBox(
       height: 280,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: [
-          _propertyCard(context, "Naples Villa", "Panjim, Goa", "86,000"),
-          _propertyCard(context, "Colina Villa", "Coorg, Kerala", "100,000"),
-        ],
+        children: properties.map((property) => _propertyCard(context, property)).toList(),
       ),
     );
   }
 
-  Widget _propertyCard(BuildContext context, String name, String loc, String price) {
-    return Container(
-      width: 220,
-      margin: const EdgeInsets.only(right: 15),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [const BoxShadow(color: Colors.black12, blurRadius: 5)]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack( // Heart on top of image
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                child: Image.network("https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500", height: 140, width: double.infinity, fit: BoxFit.cover),
-              ),
-              Positioned(
-                top: 10, right: 10,
-                child: GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, '/login'),
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                    child: const Icon(Icons.favorite, color: Colors.red, size: 18),
+  Widget _propertyCard(BuildContext context, Property property) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PropertyDetailScreen(property: property),
+          ),
+        );
+      },
+      child: Container(
+        width: 220,
+        margin: const EdgeInsets.only(right: 15),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [const BoxShadow(color: Colors.black12, blurRadius: 5)]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                  child: Image.network(property.image, height: 140, width: double.infinity, fit: BoxFit.cover),
+                ),
+                Positioned(
+                  top: 10, right: 10,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/login'),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                      child: const Icon(Icons.favorite, color: Colors.red, size: 18),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 4),
-                Row(children: [const Icon(Icons.location_on, size: 14, color: Colors.grey), Text(loc, style: const TextStyle(color: Colors.grey))]),
-                const SizedBox(height: 8),
-                Text("\$$price/month", style: const TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold)),
               ],
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(property.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 4),
+                  Row(children: [const Icon(Icons.location_on, size: 14, color: Colors.grey), Text(property.location, style: const TextStyle(color: Colors.grey))]),
+                  const SizedBox(height: 8),
+                  Text("\$${property.price}/month", style: const TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
