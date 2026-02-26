@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/main_navigation.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -32,9 +33,8 @@ class SignupScreen extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
                 onPressed: () {
-                  // THIS IS THE DRIVER:
-                  // It tells the app to go to home and clear the login/signup history
-                  Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                  // Navigate to main navigation and clear signup history
+                  Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
                 },
                 child: const Text(
                     "Sign Up",

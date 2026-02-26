@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/main_navigation.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -7,7 +8,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: _buildBottomNav(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
         const Text("Zillow", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/profile');
+            mainNavigationKey.currentState?.navigateToTab(3); // Navigate to Profile tab
           },
           child: const CircleAvatar(
             radius: 20,
@@ -61,6 +61,8 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
+
+
         const SizedBox(width: 10),
         Container(
           padding: const EdgeInsets.all(12),
@@ -161,23 +163,6 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildBottomNav(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.blueAccent,
-      unselectedItemColor: Colors.grey,
-      onTap: (index) {
-        if (index != 0) Navigator.pushNamed(context, '/login');
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: "Favorite"),
-        BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Reviews"),
-        BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "Profile"),
-      ],
     );
   }
 }
