@@ -14,17 +14,13 @@ class Home extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              _buildHeader(context),
               const SizedBox(height: 20),
               _buildSearchBar(),
               const SizedBox(height: 25),
               _buildCategoryIcons(),
               const SizedBox(height: 25),
-              _buildSectionHeader("Recommended Property"),
-              const SizedBox(height: 15),
               _buildPropertyCards(context), // Pass context
-              const SizedBox(height: 25),
-              _buildSectionHeader("Nearby Property"),
             ],
           ),
         ),
@@ -32,15 +28,20 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Text("Zillow", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
-        const CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.blueAccent,
-          child: Icon(Icons.person, color: Colors.white),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/profile');
+          },
+          child: const CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.blueAccent,
+            child: Icon(Icons.person, color: Colors.white),
+          ),
         )
       ],
     );
