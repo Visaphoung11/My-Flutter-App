@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/main_navigation.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
-                onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+                onPressed: () => Navigator.pushReplacementNamed(context, '/main'),
                 child: const Text("Sign In", style: TextStyle(color: Colors.white)),
               ),
             ),
