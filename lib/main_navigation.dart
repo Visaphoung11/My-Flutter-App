@@ -10,9 +10,6 @@ class MainNavigation extends StatefulWidget {
   State<MainNavigation> createState() => _MainNavigationState();
 }
 
-// Global key to access navigation state from anywhere
-final GlobalKey<_MainNavigationState> mainNavigationKey = GlobalKey<_MainNavigationState>();
-
 class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
 
@@ -22,13 +19,6 @@ class _MainNavigationState extends State<MainNavigation> {
     const ReviewsScreen(), // We'll create this next
     const ProfileScreen(),
   ];
-
-  // Method to change tab from anywhere
-  void navigateToTab(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

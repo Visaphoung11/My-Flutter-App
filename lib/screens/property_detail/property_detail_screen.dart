@@ -3,7 +3,7 @@ import 'widgets/header_section.dart';
 import 'widgets/gallery_section.dart';
 import 'widgets/content_section.dart';
 import 'widgets/bottom_section.dart';
-import '../../model/property.dart';
+import '../../models/property.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
   final Property? property;
