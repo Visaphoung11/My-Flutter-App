@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/screens/home.screen.dart';
 import 'package:my_first_app/screens/favorites_screen.dart';
+import 'package:my_first_app/screens/reviews_screen.dart';
 import 'package:my_first_app/screens/profile_screen.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = [
     const Home(),
     const FavoritesScreen(),
-    const ReviewsScreen(), // We'll create this next
+    const ReviewsScreen(),
     const ProfileScreen(),
   ];
 
