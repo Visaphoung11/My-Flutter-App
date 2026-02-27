@@ -3,6 +3,8 @@ import 'package:my_first_app/screens/login_screen.dart';
 import 'package:my_first_app/screens/signup_screen.dart';
 import 'package:my_first_app/screens/splash_screen.dart';
 import 'package:my_first_app/main_navigation.dart';
+
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/main': (context) => MainNavigation(key: mainNavigationKey),
+        '/main': (context) => const MainNavigation(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
       },

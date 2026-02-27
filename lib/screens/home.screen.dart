@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
-import '../model/property.dart';
+import 'package:my_first_app/models/property.dart';
+import 'package:my_first_app/services/property_manager.dart';
 import 'property_detail/property_detail_screen.dart';
-import '../main_navigation.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final PropertyManager _propertyManager = PropertyManager();
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen to property changes
+    _propertyManager.addListener(_onPropertiesChanged);
+  }
+
+  @override
+  void dispose() {
+    _propertyManager.removeListener(_onPropertiesChanged);
+    super.dispose();
+  }
+
+  void _onPropertiesChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +63,10 @@ class Home extends StatelessWidget {
         const Text("Zillow", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
         GestureDetector(
           onTap: () {
-            mainNavigationKey.currentState?.navigateToTab(3); // Navigate to Profile tab
+            // For now, just show a message since we can't directly access parent state
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Use bottom navigation to go to Profile')),
+            );
           },
           child: const CircleAvatar(
             radius: 20,
@@ -111,21 +140,7 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildPropertyCards(BuildContext context) {
-    // Create Property objects
-    List<Property> properties = [
-      Property(
-        name: "Naples Villa",
-        location: "Panjim, Goa", 
-        price: "86,000",
-        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500"
-      ),
-      Property(
-        name: "Colina Villa",
-        location: "Coorg, Kerala",
-        price: "100,000", 
-        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500"
-      ),
-    ];
+    final properties = _propertyManager.properties;
     
     return SizedBox(
       height: 280,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_app/screens/create_property_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -16,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
@@ -89,6 +90,19 @@ class ProfileScreen extends StatelessWidget {
               title: "Two-Factor Authentication",
               subtitle: "Further secure your account",
               onTap: () {},
+            ),
+            _profileTile(
+              icon: Icons.add_home_work,
+              title: "Create Property",
+              subtitle: "Add a new property listing",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CreatePropertyScreen(),
+                  ),
+                );
+              },
             ),
             _profileTile(
               icon: Icons.logout,

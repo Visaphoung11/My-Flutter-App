@@ -4,7 +4,7 @@ import 'widgets/gallery_section.dart';
 import 'widgets/content_section.dart';
 import 'widgets/review_section.dart';
 import 'widgets/bottom_section.dart';
-import '../../model/property.dart';
+import '../../models/property.dart';
 
 class PropertyDetailScreen extends StatefulWidget {
   final Property? property;

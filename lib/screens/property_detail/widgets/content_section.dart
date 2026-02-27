@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../widgets/info_item.dart';
-import '../../../model/property.dart';
+import '../../../models/property.dart';
 
 class ContentSection extends StatelessWidget {
   final Property? property;
